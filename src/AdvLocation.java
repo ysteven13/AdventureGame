@@ -1,0 +1,94 @@
+/* StarylLocation -- This class represents a single room on the map; a room corresponds to one vertex of a dodecahedron.
+ * The class helps in navigating the map and handling encounters when the player moves.
+ */
+public class AdvLocation {
+
+    int myIndex;
+    int[] neighbors;
+
+    public LocationElement myElement;
+
+    AdvLocation(int ndx, int c, int j, int l) {
+        myIndex = ndx;
+        neighbors = new int [AdvMap.N_LOCATIONS + 1];
+        neighbors[AdvMap.CAPITAL] = c;
+        neighbors[AdvMap.JEX] = j;
+        neighbors[AdvMap.LANA] = l;
+
+    }
+
+    int getIndex() {
+        return myIndex;
+    }
+
+    LocationElement getElement() {
+        return myElement;
+    }
+
+    void setElement(LocationElement elem) {
+        myElement = elem;
+    }
+
+    AdvLocation roomInDirection(int dir) {
+        return AdvMain.map.getRoom(neighbors[dir]);
+    }
+
+
+    void printInfo() {
+        if (AdvMain.nDistance > 0) {
+            System.out.print("\nWelcome to " + AdvMap.CITY_NAMES[AdvMain.Cityndx].toUpperCase() + ".");
+        } else {
+            System.out.print("\nWelcome to " + AdvMap.CITY_NAMES_RESHUFFLED[AdvMain.currentRoomIndex].toUpperCase() + ".");
+        }
+        System.out.println(AdvMain.nDistance == 0 ? AdvMain.currentRoomIndex >= 7 ? "\nInput:" +
+                "\n(g) Gear Info" +
+                "\n(m)	Map" +
+                "\n(b)	Backpack" +
+                "\n(l)	Leave location" +
+                "\n(e)	explore town"
+                :
+                "\nInput:" +
+                        "\n(g)	Gear Info" +
+                        "\n(m)	Map" +
+                        "\n(b)	Backpack" +
+                        "\n(l)	Leave location"
+                : AdvMain.Cityndx <= 14 ?
+                "\nInput: " +
+                        "\n(g)	Gear Info" +
+                        "\n(m)	Map" +
+                        "\n(b)	Backpack" +
+                        "\n(l)	Leave location" +
+                        "\n(e)	Explore town"
+                :
+                "\nInput: " +
+                        "\n(g)	Gear Info" +
+                        "\n(m)	Map" +
+                        "\n(b)	Backpack" +
+                        "\n(l)	Leave location");
+        System.out.println();
+        for (int i = 1; i <= AdvMap.N_LOCATIONS; i++) {
+            AdvLocation room = roomInDirection(i);
+            if (room != null && room.myElement != null) {
+                room.myElement.printSenses();
+            }
+        }
+
+        System.out.println();
+    }
+
+    void printTravel() {
+        System.out.println("Travel to: ");
+        for (int i = 1; i <= AdvMap.N_LOCATIONS; i++) {
+            AdvLocation room = roomInDirection(i);
+            if (room != null) {
+                System.out.print(" " + AdvMap.locationName(i));
+            }
+        }
+    }
+
+    void handleElement() {
+        if (myElement != null) {
+            myElement.handle();
+        }
+    }
+}
