@@ -33,49 +33,6 @@ public class AdvLocation {
         return AdvMain.map.getRoom(neighbors[dir]);
     }
 
-
-    void printInfo() {
-        if (AdvMain.nDistance > 0) {
-            System.out.print("\nWelcome to " + AdvMap.CITY_NAMES[AdvMain.Cityndx].toUpperCase() + ".");
-        } else {
-            System.out.print("\nWelcome to " + AdvMap.CITY_NAMES_RESHUFFLED[AdvMain.currentRoomIndex].toUpperCase() + ".");
-        }
-        System.out.println(AdvMain.nDistance == 0 ? AdvMain.currentRoomIndex >= 7 ? "\nInput:" +
-                "\n(g) Gear Info" +
-                "\n(m)	Map" +
-                "\n(b)	Backpack" +
-                "\n(l)	Leave location" +
-                "\n(e)	explore town"
-                :
-                "\nInput:" +
-                        "\n(g)	Gear Info" +
-                        "\n(m)	Map" +
-                        "\n(b)	Backpack" +
-                        "\n(l)	Leave location"
-                : AdvMain.Cityndx <= 14 ?
-                "\nInput: " +
-                        "\n(g)	Gear Info" +
-                        "\n(m)	Map" +
-                        "\n(b)	Backpack" +
-                        "\n(l)	Leave location" +
-                        "\n(e)	Explore town"
-                :
-                "\nInput: " +
-                        "\n(g)	Gear Info" +
-                        "\n(m)	Map" +
-                        "\n(b)	Backpack" +
-                        "\n(l)	Leave location");
-        System.out.println();
-        for (int i = 1; i <= AdvMap.N_LOCATIONS; i++) {
-            AdvLocation room = roomInDirection(i);
-            if (room != null && room.myElement != null) {
-                room.myElement.printSenses();
-            }
-        }
-
-        System.out.println();
-    }
-
     void printTravel() {
         System.out.println("Travel to: ");
         for (int i = 1; i <= AdvMap.N_LOCATIONS; i++) {
@@ -84,6 +41,29 @@ public class AdvLocation {
                 System.out.print(" " + AdvMap.locationName(i));
             }
         }
+    }
+
+    void printInfo() {
+        if (AdvMain.nDistance > 0) {
+            System.out.print("\nWelcome to " + AdvMap.CITY_NAMES[AdvMain.Cityndx].toUpperCase() + ".");
+        } else {
+            System.out.print("\nWelcome to " + AdvMap.CITY_NAMES_RESHUFFLED[AdvMain.currentRoomIndex].toUpperCase() + ".");
+
+        }
+        System.out.println("\nInput:" +
+                "\n(g) Gear Info" +
+                "\n(m)	Map" +
+                "\n(b)	Backpack" +
+                "\n(l)	Leave location" +
+                "\n(e)	explore town\n");
+        for (int i = 1; i <= AdvMap.N_LOCATIONS; i++) {
+            AdvLocation room = roomInDirection(i);
+            if (room != null && room.myElement != null) {
+                room.myElement.printSenses();
+            }
+        }
+
+        System.out.println();
     }
 
     void handleElement() {

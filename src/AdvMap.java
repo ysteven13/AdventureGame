@@ -24,16 +24,16 @@ public class AdvMap {
 
     AdvMap() {
         locations = new AdvLocation[N_LOCATIONS + 1];
-        locations[1] =  new AdvLocation(1, 7, 0, 9); // v Crossroad ## v
-        locations[2] =  new AdvLocation(2, 0, 0, 9);
-        locations[3] =  new AdvLocation(3, 0, 0, 9);
+        locations[1] =  new AdvLocation(1, 0, 2, 3); // v Crossroad ## v
+        locations[2] =  new AdvLocation(2, 1, 0, 0);
+        locations[3] =  new AdvLocation(3, 1, 0, 0);
 
     }
 
 
     static String locationName(int dir) {
 // change this to add direction
-        if (dir >= 1 && dir <= 20)
+        if (dir >= 1 && dir <= 4)
             return CITY_NAMES[dir];
         else
             return "ERROR";
