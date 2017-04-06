@@ -13,6 +13,10 @@ public class AdvMap {
     static final int JEX = 2;
     static final int LANA = 3;
 
+    static City_Capital capital = new City_Capital(); //train , bank
+    static City_Jex jex = new City_Jex(); //training center
+    static City_Lana lana = new City_Lana(); // store
+
 
     final static String[] CITY_NAMES = {"", "capital", "jex", "lana"};
     final static String[] EXPLORABLE_DESTINATIONS = {"", "capital", "jex", "lana"};
@@ -61,6 +65,20 @@ public class AdvMap {
         }
         while (locations[r].getElement() != null);
         return r;
+    }
+
+    void enterCity (int ndx) {
+        switch (ndx) {
+            case 1:
+                capital.central();
+                break;
+            case 2:
+                jex.central();
+                break;
+            case 3:
+                lana.central();
+                break;
+        }
     }
 
     void addElement(LocationElement elem) {getRoom(randomCity()).setElement(elem);}

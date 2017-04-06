@@ -1,7 +1,7 @@
-import java.io.BufferedReader;
-import java.io.Console;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Random;
+import java.util.Scanner;
+
+// Fix training (0 rounds, 0 experience when completed) remove experience awarded during training
 
 /**
  * Created by caleb on 3/30/17.
@@ -28,20 +28,15 @@ public class AdvMain {
 
 
     static String readLine(String prompt) {
-        String line = null;
-        Console c = System.console();
-        if (c != null) {
-            line = c.readLine(prompt);
-        } else {
-            System.out.print(prompt);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-            try {
-                line = bufferedReader.readLine();
-            } catch (IOException e) {
-                //Ignore
-            }
-        }
-        return line;
+        System.out.println(prompt);
+        Scanner scan = new Scanner(System.in);
+        return scan.nextLine();
+    }
+
+    public static int randomInt(int min, int max) { //generates a random integer between the two parameters
+        Random rand = new Random();
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+        return randomNum;
     }
 
     static void End() {
@@ -82,6 +77,8 @@ public class AdvMain {
                         seemaps.fullMap();
                     } else if (userInput.equals("b") || userInput.equals("backpack") || userInput.equals("inventory")) {
                         p.Inventory();
+                    } else if (userInput.equals("e") || userInput.equals("explore")) {
+                        map.enterCity(currentRoomIndex);
                     } else if (userInput.equals("l") || userInput.equals("leave")) {
                         map.getRoom(currentRoomIndex).printTravel();
                         String travel = readLine("\nWhere would you like to travel to? (Enter: (explore) or (e) to stay in current location)");
