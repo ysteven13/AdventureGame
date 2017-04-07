@@ -10,6 +10,7 @@ public class AdvMain {
 
     static AdvMap map = new AdvMap();
     static Player p = new Player();
+    static Monster m = new Monster();
     static ViewableMaps seemaps = new ViewableMaps();
 
     static int nDistance;
@@ -66,6 +67,10 @@ public class AdvMain {
                 currentRoomIndex = map.randomCity();
 
                 do {
+                    if (nDistance == randomInt(3, 25)) {
+                        int monsterndx = randomInt(0, 3);
+                        m.spawnMonster(monsterndx, m.monsterHealth, m.MONSTER_NAMES, 10, 30);
+                    }
                     // prints info
                     map.getRoom(currentRoomIndex).printInfo();
 

@@ -1,7 +1,7 @@
 /**
  * Created by coffincw on 11/29/16.
  */
-public class PlayerAttack {
+public class PlayerAttack extends Player{
 
     private boolean repeatAttack;
     private int percentHit;
@@ -9,7 +9,6 @@ public class PlayerAttack {
     int attack;
     private int poison;
 
-    private static Player p = new Player();
     private static MonsterOrganization monster = new MonsterOrganization();
     private static Gearset gear = new Gearset();
 
@@ -120,8 +119,8 @@ public class PlayerAttack {
     private int attackAddition(int monsterIndex, int damageRange) {
         int damage = 0;
         damage = damageRange;
-        for (int a = 0; a <= p.additionalDamage.length - 1; a++) {
-            damage += p.additionalDamage[a];
+        for (int a = 0; a <= additionalDamage.length - 1; a++) {
+            damage += additionalDamage[a];
         }
         poison = machetePoison();
         damage += poison;

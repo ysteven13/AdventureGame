@@ -5,8 +5,8 @@ public class City_Jex extends CityElement {
 
     static TrainingCenter training = new TrainingCenter();
 
-    private final String BUILDING_NAMES[] = {"Jasmines Bakery", "Jex Training Center", "Leave Jex Interior"};
-    private final String BUILDING_SHORT_NAMES[] = {"bakery", "train", "leave"};
+    private final String BUILDING_NAMES[] = {"Jasmines Market", "Jex Training Center", "Leave Jex Interior"};
+    private final String BUILDING_SHORT_NAMES[] = {"market", "train", "leave"};
 
 
     @Override
