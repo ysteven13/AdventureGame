@@ -9,17 +9,17 @@ public class PlayerAttack extends Player{
     int attack;
     private int poison;
 
-    private static MonsterOrganization monster = new MonsterOrganization();
-    private static Gearset gear = new Gearset();
+    private MonsterOrganization monster = new MonsterOrganization();
+    private Gearset gear = new Gearset();
 
-    final String attackMonster[] = {"neck", "eyes", "chest"};
+    private final String attackMonster[] = {"neck", "eyes", "chest"};
 
     private final int percentNeck[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
     private final int percentEyes[] = {0, 1, 2, 3, 4};
     private final int percentChest[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18};
 
     void playerAttack(String monsterName, int monsterIndex, int[] monsterHealth, boolean train) {
-        percentHit = AdvMain.randomInt(0, 10);
+        percentHit = AdvMain.randomInt(0, 20);
         tempDamage = 0;
         repeatAttack = true;
         while (repeatAttack) {
@@ -40,7 +40,7 @@ public class PlayerAttack extends Player{
         System.out.println("You dealt " + tempDamage + " to the " + monsterName + "! the " + monsterName + " has " + monsterHealth[monsterIndex] + " health remaining.");
 
         System.out.println(poison);
-        System.out.println(attack);
+
         if (poison != 0) {
             System.out.println("The " + monsterName + " was hurt by your machete's poison blade");
         }
@@ -49,7 +49,7 @@ public class PlayerAttack extends Player{
     private void hitNeck(int[] percentN, int playerDamage) {
         for (int p = 0; p <= percentN.length - 1; p++) {
             if (percentHit == percentN[p]) { // 60% hit percentage
-                tempDamage = playerDamage; // change this for nontraining battle
+                tempDamage = playerDamage; // change this for nontraining battle (currently not implemented for weapon upgrades)
             }
         }
         if (tempDamage == 0) {
@@ -130,10 +130,9 @@ public class PlayerAttack extends Player{
 
     int machetePoison() {
         int poison = 0;
-        gear.weaponClass = 1;
         if (gear.weaponClass == 1 && attack != 0) {
-            int change = AdvMain.randomInt(1, 5);
-            if (change == 1) {
+            int poisonProbability = AdvMain.randomInt(1, 5);
+            if (poisonProbability == 1) {
                 poison = AdvMain.randomInt(5, 10);
             }
         }

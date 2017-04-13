@@ -10,22 +10,20 @@ Player class which holds the inventory, maps, statistics, score and highscore ca
 public class Player {
 
     // Health Potions, Pebbles, Starcoins
-    static int items[] = {0, 0, 0}; // split into arrays: health potions, ammo, currency?
+    int items[] = {0, 0, 0}; // split into arrays: health potions, ammo, currency?
 
     // large hp, medium hp, small hp, beer, donut, croissant
-    static final String CONSUMABLE_NAMES[] = {"Large Health Potion", "Medium Health Potion", "Small Health Potion", "Beer", "Donut", "Croissant"};
-    static final String CONSUMABLE_SHORT_NAMES[] = {"large", "medium", "small", "b", "d", "cro"};
-    static int consumables[] = {0, 0, 0, 0, 0, 0};
-    static final int healAmount[] = {35, 25, 15, 10, 20, 30};
-    static double starylCoins;
-
-    // null, Hard, Medium, Easy
+    final String CONSUMABLE_NAMES[] = {"Large Health Potion", "Medium Health Potion", "Small Health Potion", "Beer", "Donut", "Croissant"};
+    final String CONSUMABLE_SHORT_NAMES[] = {"large", "medium", "small", "b", "d", "cro"};
+    int consumables[] = {0, 0, 0, 0, 0, 0};
+    final int healAmount[] = {35, 25, 15, 10, 20, 30};
+    double starylCoins;
     // lives, health
-    static int playerStats[] = {5, 100};
+    int playerStats[] = {5, 100};
 
     // weapon, pet, armour
-    static int additionalDamage[] = {0, 0};
-    static int additionalDefense[] = {0, 0, 0, 0};
+    int additionalDamage[] = {0, 0};
+    int additionalDefense[] = {0, 0, 0, 0};
 
     static Gearset gear = new Gearset();
 
@@ -67,14 +65,20 @@ public class Player {
 
     void consume() {
         ArrayList<String> availableConsumables = new ArrayList<>();
-        if (consumables != null) {  // gives the user the option to drink one of the health potions
+        boolean foodAvailable = false;
+        for (int c = 0 ; c <= consumables.length - 1; c++) {
+            if (consumables[c] != 0) {
+                foodAvailable = true;
+            }
+        }
+        if (foodAvailable) {  // gives the user the option to drink one of the health potions
             boolean bp = true;
             while (bp) {
                 String backpackAction = AdvMain.readLine("Would you like to eat a consumable?");
                 backpackAction = backpackAction.toLowerCase();
                 if (backpackAction.equals("yes")) {
                     System.out.println("Which would you like to eat?");
-                    for (int c = 0 ; c <= CONSUMABLE_NAMES.length ; c++) {
+                    for (int c = 0 ; c <= CONSUMABLE_NAMES.length - 1 ; c++) {
                         if (consumables[c] != 0) {
                             System.out.println("(" + CONSUMABLE_SHORT_NAMES[c] + ")\t" + CONSUMABLE_NAMES[c]);
                             availableConsumables.add(CONSUMABLE_SHORT_NAMES[c]);
@@ -107,7 +111,7 @@ public class Player {
                         "Miles Traveled: " + AdvMain.nDistance + "." +
                         "Lives Remaining: " + playerStats[0] + "." +
                         "Health Remaining: " + playerStats[1] + ".");
-        gear.gearInfo(1);
+
     }
     void arrayReset() {
         for (int i = 0 ; i <= items.length ; i++ ) {

@@ -4,14 +4,14 @@
 public class MonsterAttack {
 
     int temptempHealth;
-    int dealtDamage;
+    private int dealtDamage;
 
 
     private static TrainingCenter training = new TrainingCenter();
-    private static Player p = new Player();
+    Player p = new Player();
+
 
     void mAttack(String monsterName, int monsterdmgValue, boolean checkmonster) {
-        System.out.println(checkmonster);
         if (checkmonster) {
             training.tempHeath = 100;
         }

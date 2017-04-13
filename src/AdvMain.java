@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -6,11 +7,12 @@ import java.util.Scanner;
 /**
  * Created by caleb on 3/30/17.
  */
-public class AdvMain {
+public class AdvMain{
 
     static AdvMap map = new AdvMap();
     static Player p = new Player();
     static Monster m = new Monster();
+
     static ViewableMaps seemaps = new ViewableMaps();
 
     static int nDistance;
@@ -51,11 +53,14 @@ public class AdvMain {
 
     public static void main (String[] args) {
 
+        AdvWindow mainWindow = new AdvWindow();
+
         replayFull = true; // play again boolean
         do {
             turn = 0; // for armour experience
 //            spawn.nRTT = 0; //for item spawn
             int gamemodeTitle = 0;
+            TitleScreen.Start();
             while (gamemodeTitle < 1) {
                 try {
                     gamemodeTitle = Integer.valueOf(readLine("STARYL\n<1> Play\n<2> Instructions\n<3> Leave\n"));
@@ -67,17 +72,21 @@ public class AdvMain {
                 currentRoomIndex = map.randomCity();
 
                 do {
-                    if (nDistance == randomInt(3, 25)) {
-                        int monsterndx = randomInt(0, 3);
-                        m.spawnMonster(monsterndx, m.monsterHealth, m.MONSTER_NAMES, 10, 30);
+                    if (nDistance > 2) {
+                        if (randomInt(1, 4) == randomInt(1, 4)) {
+                            int monsterndx = randomInt(0, 3);
+                            m.spawnMonster(monsterndx, m.monsterHealth, m.MONSTER_NAMES, 10, 30);
+                        }
                     }
                     // prints info
                     map.getRoom(currentRoomIndex).printInfo();
 
                     String userInput = readLine(">");
                     userInput = userInput.toLowerCase();
-                    if (userInput.equals("s") || userInput.equals("stats") || userInput.equals("gear info")) {
+                    if (userInput.equals("s") || userInput.equals("stats")) {
                         p.Stats();
+                    }else if (userInput.equals("g") || userInput.equals("gear info")){
+                        p.gear.gearInfo(1);
                     } else if (userInput.equals("m") || userInput.equals("map")) {
                         seemaps.fullMap();
                     } else if (userInput.equals("b") || userInput.equals("backpack") || userInput.equals("inventory")) {
@@ -101,18 +110,18 @@ public class AdvMain {
                                 System.out.println("You can't move in that direction.");
                             }
                         } else if (travel.equals("bye")) {
-                            Player.playerStats[0] = 0;
+                            p.playerStats[0] = 0;
                         } else {
                             System.out.println("Command not understood");
                         }
                     } else if (userInput.equals("e") || userInput.equals("explore")) {
                         // org.cityOrganization(currentRoomIndex);
                     } else if (userInput.equals("bye")) {
-                        Player.playerStats[0] = 0;
+                        p.playerStats[0] = 0;
                     } else {
                         System.out.println("Command not understood.");
                     }
-                } while (Player.playerStats[0] > 0);
+                } while (p.playerStats[0] > 0);
                 End();
                 p.arrayReset();
 

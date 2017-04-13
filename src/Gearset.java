@@ -1,36 +1,34 @@
 /**
  * Created by coffincw on 11/24/16.
  */
-public class Gearset {
+public class Gearset extends Player{
 
     int weaponClass = 0;
 
-    static Player p = new Player();
+    String armour[] = {"Helmet", "Shirt", "Pants", "Boots"};
+    String weapons[] = {"Slingshot", "Machete", "Hunting Rifle", "Saber"};
+    String gear[] = {"Helmet", "Shirt", "Pants", "Boots", "Weapon"};
 
-    static String armour[] = {"Helmet", "Shirt", "Pants", "Boots"};
-    static String weapons[] = {"Slingshot", "Machete", "Hunting Rifle", "Saber"};
-    static String gear[] = {"Helmet", "Shirt", "Pants", "Boots", "Weapon"};
+    final String AMO_NAMES[] = {"Pebbles", "Bullets"};
+    int amo[] = {0, 0};
 
-    static final String AMO_NAMES[] = {"Pebbles", "Bullets"};
-    static int amo[] = {0, 0};
-
-    static final String weaponStart[] = {"Wooden", "Rusted", "Cricket", "Wooden"};
+    final String weaponStart[] = {"Wooden", "Rusted", "Cricket", "Wooden"};
 
     //v gear upgrades v
 
     //armour upgrades
-    static final String armourUpgrade[] = {"Tin Foil", "Steel", "Ultimate", "Staryl - X"};
+    final String armourUpgrade[] = {"Tin Foil", "Steel", "Ultimate", "Staryl - X"};
     // weapon upgrades
-    static final String slingshotUpgrade[] = {"Wooden", "Metal", "Guardian", "Staryl - X"};
-    static final String macheteUpgrade[] = {"Rusted", "Stainless Steel", "Wrath", "Staryl - X"};
-    static final String rifleUpgrade[] = {"Cricket", "Winchester", "Remington", "Staryl - X"};
-    static final String saberUpgrade[] = {"Wooden", "Metal", "Darkness", "Staryl - X" };
+    final String slingshotUpgrade[] = {"Wooden", "Metal", "Guardian", "Staryl - X"};
+    final String macheteUpgrade[] = {"Rusted", "Stainless Steel", "Wrath", "Staryl - X"};
+    final String rifleUpgrade[] = {"Cricket", "Winchester", "Remington", "Staryl - X"};
+    final String saberUpgrade[] = {"Wooden", "Metal", "Darkness", "Staryl - X" };
 
-    static int armourUpValue[] = {0, 0, 0, 0}; // level of the weapon
-    static int armourExp[] = {0, 0, 0, 0}; // exp held by armour
+    int armourUpValue[] = {0, 0, 0, 0}; // level of the weapon
+    int armourExp[] = {0, 0, 0, 0}; // exp held by armour
 
-    static int weaponUpValue[] = {0, 0, 0, 0}; // level of weapon
-    static int weaponExp[] = {0, 0, 0, 0}; // exp held by weapon
+    int weaponUpValue[] = {0, 0, 0, 0}; // level of weapon
+    int weaponExp[] = {0, 0, 0, 0}; // exp held by weapon
 
     void gearInfo(int i) {
         if (i > 0) {
@@ -54,7 +52,7 @@ public class Gearset {
         for (int e = 0; e <= armourExp.length - 1 ; e++) {
             if (armourExp[e] >= 100) {
                 armourUpValue[e] ++;
-                p.additionalDefense[e] += 10;
+                additionalDefense[e] += 10;
                 System.out.println(armour[e] + " leveled up to: " + armourUpgrade[armourUpValue[e]]);
                 armourExp[e] = 0;
             }
@@ -68,7 +66,7 @@ public class Gearset {
                 if (weaponClass >= 3 && weaponUpValue[e] >= 100) {}
                 else {
                     weaponUpValue[e]++;
-                    p.additionalDamage[0] += 10;
+                    additionalDamage[0] += 10;
                     if (weaponClass == 0) {
                         System.out.println("Slingshot level up to " + slingshotUpgrade[weaponUpValue[e]]);
                     } else if (weaponClass == 1) {

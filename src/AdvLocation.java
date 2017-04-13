@@ -52,6 +52,7 @@ public class AdvLocation {
         }
         System.out.println("\nInput:" +
                 "\n(g) Gear Info" +
+                "\n(s) Stats" +
                 "\n(m)	Map" +
                 "\n(b)	Backpack" +
                 "\n(l)	Leave location" +

@@ -16,7 +16,7 @@ public class MonsterOrganization {
     static int monsterHealth[] = {40, 50, 30, 60};
     final static int MONSTER_HEALTH_START[] = {40, 50, 30, 60};
     final static int monsterExp[] = {10, 15, 5, 20};
-    final static int monsterDefense[] = {3, 10, 1, 20};
+    final int monsterDefense[] = {3, 10, 1, 20};
 
     void expWon(int monsterIndex) {
         int random = AdvMain.randomInt(0, 4);
