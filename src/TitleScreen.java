@@ -14,16 +14,17 @@ Class which have all the information available on the title screen.  It allows t
 public class TitleScreen extends AdvWindow implements ActionListener {
 
     private JButton[] buttonTitle = {new JButton("Start"), new JButton("Instructions"), new JButton("About"), new JButton("Exit")};
-    private JLabel[] title = {new JLabel("Carthage"), new JLabel("Instructions")};
+    private JLabel[] title = {new JLabel("Carthage")};
 
+    AdvPanel titlePanel = new AdvPanel();
 
     public TitleScreen() {
 
-        AdvPanel titlePanel = new AdvPanel();
 
-        mainFrame.setContentPane(titlePanel);
+        mainFrame.getContentPane().add(titlePanel);
         titlePanel.setBackground(Color.GRAY);
-        //do {
+
+        //layout
         BoxLayout layout = new BoxLayout(titlePanel, BoxLayout.Y_AXIS);
         titlePanel.setLayout(layout);
 
@@ -31,14 +32,11 @@ public class TitleScreen extends AdvWindow implements ActionListener {
         title[0].setFont(new Font("Old London", Font.PLAIN, 100));
         title[0].setBorder(BorderFactory.createEmptyBorder(150, 30, 150, 30));
         title[0].setAlignmentX(Component.CENTER_ALIGNMENT);
-        title[0].setAlignmentY(Component.CENTER_ALIGNMENT);
         titlePanel.add(title[0]);
 
         for (int b = 0; b <= buttonTitle.length - 1; b++) {
             titlePanel.add(buttonTitle[b]);
             buttonTitle[b].setAlignmentX(Component.CENTER_ALIGNMENT);
-            buttonTitle[b].setAlignmentY(Component.BOTTOM_ALIGNMENT);
-//                titlePanel.add(Box.createHorizontalGlue());
             buttonTitle[b].addActionListener(this);
         }
         buttonTitle[0].setToolTipText("Click to start your adventure");
@@ -56,9 +54,9 @@ public class TitleScreen extends AdvWindow implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonTitle[0]) {
-            //titleScreen = false;
+            titlePanel.setVisible(false);
+            GameplayWindow game = new GameplayWindow();
         } else if (e.getSource() == buttonTitle[1]) {
-
             JOptionPane.showMessageDialog(null, gameInstruct());
         } else if (e.getSource() == buttonTitle[2]) {
             JOptionPane.showMessageDialog(null, About());

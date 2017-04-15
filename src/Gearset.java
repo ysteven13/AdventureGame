@@ -1,7 +1,7 @@
 /**
  * Created by coffincw on 11/24/16.
  */
-public class Gearset extends Player{
+public class Gearset extends Player {
 
     int weaponClass = 0;
 
@@ -22,7 +22,7 @@ public class Gearset extends Player{
     final String slingshotUpgrade[] = {"Wooden", "Metal", "Guardian", "Staryl - X"};
     final String macheteUpgrade[] = {"Rusted", "Stainless Steel", "Wrath", "Staryl - X"};
     final String rifleUpgrade[] = {"Cricket", "Winchester", "Remington", "Staryl - X"};
-    final String saberUpgrade[] = {"Wooden", "Metal", "Darkness", "Staryl - X" };
+    final String saberUpgrade[] = {"Wooden", "Metal", "Darkness", "Staryl - X"};
 
     int armourUpValue[] = {0, 0, 0, 0}; // level of the weapon
     int armourExp[] = {0, 0, 0, 0}; // exp held by armour
@@ -30,28 +30,31 @@ public class Gearset extends Player{
     int weaponUpValue[] = {0, 0, 0, 0}; // level of weapon
     int weaponExp[] = {0, 0, 0, 0}; // exp held by weapon
 
-    void gearInfo(int i) {
+    String gearInfo(int i) {
+        String gear = "";
         if (i > 0) {
-            System.out.println("Gear Info: \n------");
+            gear = "Gear Info: \n------";
         }
-        for (int g = 0; g <= armour.length - 2 ; g++) {
-            System.out.println(armourUpgrade[armourUpValue[g]] + " " + armour[g]);
+
+        for (int g = 0; g <= armour.length - 2; g++) {
+            gear += "\n" + armourUpgrade[armourUpValue[g]] + " " + armour[g];
         }
         if (weaponClass == 0) { // slingshot
-            System.out.println(slingshotUpgrade[weaponUpValue[0]] + " " + weapons[weaponClass]);
+            gear += "\n" + slingshotUpgrade[weaponUpValue[0]] + " " + weapons[weaponClass];
         } else if (weaponClass == 1) { // machete
-            System.out.println(macheteUpgrade[weaponUpValue[1]] + " " + weapons[weaponClass]);
+            gear += "\n" + macheteUpgrade[weaponUpValue[1]] + " " + weapons[weaponClass];
         } else if (weaponClass == 2) { // rifle
-            System.out.println(rifleUpgrade[weaponUpValue[2]] + " " + weapons[weaponClass]);
+            gear += "\n" + rifleUpgrade[weaponUpValue[2]] + " " + weapons[weaponClass];
         } else if (weaponClass == 3) { // saber
-            System.out.println(saberUpgrade[weaponUpValue[3]] + " " + weapons[weaponClass]);
+            gear += "\n" + saberUpgrade[weaponUpValue[3]] + " " + weapons[weaponClass];
         }
+        return gear;
     }
 
     void armourLevelUp() {
-        for (int e = 0; e <= armourExp.length - 1 ; e++) {
+        for (int e = 0; e <= armourExp.length - 1; e++) {
             if (armourExp[e] >= 100) {
-                armourUpValue[e] ++;
+                armourUpValue[e]++;
                 additionalDefense[e] += 10;
                 System.out.println(armour[e] + " leveled up to: " + armourUpgrade[armourUpValue[e]]);
                 armourExp[e] = 0;
@@ -61,10 +64,10 @@ public class Gearset extends Player{
     }
 
     void weaponLevelUp() {
-        for (int e = 0 ; e <= weaponExp.length - 1 ; e++) {
+        for (int e = 0; e <= weaponExp.length - 1; e++) {
             if (weaponExp[e] >= 100) {
-                if (weaponClass >= 3 && weaponUpValue[e] >= 100) {}
-                else {
+                if (weaponClass >= 3 && weaponUpValue[e] >= 100) {
+                } else {
                     weaponUpValue[e]++;
                     additionalDamage[0] += 10;
                     if (weaponClass == 0) {
@@ -83,9 +86,9 @@ public class Gearset extends Player{
     }
 
     void weaponClassUp() {
-        for (int c = 0 ; c <= weaponUpValue.length - 1 ; c++) {
+        for (int c = 0; c <= weaponUpValue.length - 1; c++) {
             if (weaponUpValue[c] > 4) {
-                weaponClass ++;
+                weaponClass++;
                 System.out.println("Your " + weapons[weaponClass - 1] + " classed up to " + weapons[weaponClass]);
                 weaponUpValue[c] = 0;
                 weaponExp[c] = 0;

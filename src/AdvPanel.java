@@ -1,5 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
 /**
  * Created by caleb on 3/20/17.
@@ -14,6 +15,11 @@ public class AdvPanel extends JPanel {
     }
     public void erase() {
         getGraphics().clearRect(0, 0, getWidth(), getHeight() );
+    }
+
+    void addBorder(AdvPanel panel, String borderTitle) {
+        TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), borderTitle);
+        panel.setBorder(title);
     }
 
     public void drawRandomCircle() {
