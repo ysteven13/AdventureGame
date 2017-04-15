@@ -25,7 +25,7 @@ public class AdvMain{
     //loops
     static String reEdit;
     static boolean city;
-    private static boolean replayFull;
+    static boolean replayFull;
 
     public static int currentRoomIndex = 1;
 
@@ -60,7 +60,8 @@ public class AdvMain{
             turn = 0; // for armour experience
 //            spawn.nRTT = 0; //for item spawn
             int gamemodeTitle = 0;
-            TitleScreen.Start();
+            TitleScreen title = new TitleScreen();
+
             while (gamemodeTitle < 1) {
                 try {
                     gamemodeTitle = Integer.valueOf(readLine("STARYL\n<1> Play\n<2> Instructions\n<3> Leave\n"));
@@ -126,7 +127,6 @@ public class AdvMain{
                 p.arrayReset();
 
             } else if (gamemodeTitle == 2) {
-                TitleScreen.Instructions();
             } else if (gamemodeTitle == 3) {
                 seemaps.fullMap();
             }

@@ -1,54 +1,88 @@
 /**
  * Created by C on 11/15/2016.
  */
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 
 /*
 Class which have all the information available on the title screen.  It allows the player the see the game instructions, score explained, maps and to just start the game.
  */
-public class TitleScreen extends AdvWindow{
+public class TitleScreen extends AdvWindow implements ActionListener {
 
-    static JTextField[] title;
-    static Player p = new Player();
+    private JButton[] buttonTitle = {new JButton("Start"), new JButton("Instructions"), new JButton("About"), new JButton("Exit")};
+    private JLabel[] title = {new JLabel("Carthage"), new JLabel("Instructions")};
 
-    static AdvWindow UI = new AdvWindow();
 
-    static void Start() {
+    public TitleScreen() {
+
+        AdvPanel titlePanel = new AdvPanel();
+
+        mainFrame.setContentPane(titlePanel);
+        titlePanel.setBackground(Color.GRAY);
+        //do {
+        BoxLayout layout = new BoxLayout(titlePanel, BoxLayout.Y_AXIS);
+        titlePanel.setLayout(layout);
+
+        //adding pieces
+        title[0].setFont(new Font("Old London", Font.PLAIN, 100));
+        title[0].setBorder(BorderFactory.createEmptyBorder(150, 30, 150, 30));
+        title[0].setAlignmentX(Component.CENTER_ALIGNMENT);
+        title[0].setAlignmentY(Component.CENTER_ALIGNMENT);
+        titlePanel.add(title[0]);
+
+        for (int b = 0; b <= buttonTitle.length - 1; b++) {
+            titlePanel.add(buttonTitle[b]);
+            buttonTitle[b].setAlignmentX(Component.CENTER_ALIGNMENT);
+            buttonTitle[b].setAlignmentY(Component.BOTTOM_ALIGNMENT);
+//                titlePanel.add(Box.createHorizontalGlue());
+            buttonTitle[b].addActionListener(this);
+        }
+        buttonTitle[0].setToolTipText("Click to start your adventure");
+        buttonTitle[1].setToolTipText("Click to view how the game is played");
+        buttonTitle[2].setToolTipText("Click to exit the game");
+
+        pack();
+        setLocationRelativeTo(null);
         mainFrame.setVisible(true);
-        mainPanel.add(new JLabel("Adventure Game"));
+        //  } while (titleScreen);
+
 
     }
 
-    static void Instructions() {
-        title = new JTextField[19];
-        boolean instruct = true;
-        while (instruct) {
-            instruct = true;
-            int instructionsOption = 0;
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == buttonTitle[0]) {
+            //titleScreen = false;
+        } else if (e.getSource() == buttonTitle[1]) {
 
-            while (instructionsOption < 1) {
-                try {
-                    instructionsOption = Integer.valueOf(AdvMain.readLine("Which would you like to learn about: \n<1> Game Instructions\n<2> Score Explained\n<3> Return to Title\n"));
-                } catch (NumberFormatException ex) {
-                }
-            }
-            if (instructionsOption == 1) {
-                TitleScreen.gameInstruct();
-            } else if (instructionsOption == 2) {
-                TitleScreen.ScoreExp();
-            } else if (instructionsOption == 3) {
-                instruct = false;
-            }
+            JOptionPane.showMessageDialog(null, gameInstruct());
+        } else if (e.getSource() == buttonTitle[2]) {
+            JOptionPane.showMessageDialog(null, About());
+        } else if (e.getSource() == buttonTitle[3]) {
+            mainFrame.dispatchEvent(new WindowEvent(mainFrame, WindowEvent.WINDOW_CLOSING));
+
         }
     }
 
-    static void gameInstruct() {
-        System.out.println("");
+    String gameInstruct() {
+        return "How to Play:" +
+                "\nUse the buttons at the bottom of the screen to" +
+                "\nmake decisions which will effect your fate in" +
+                "\nCarthage.  While in battle, use the different" +
+                "\noptions of attack to wound the enemy before" +
+                "\nthey best you. Each city and location has there" +
+                "\nown pieces you can interact with.  Good Luck" +
+                "\nand dont die! ";
     }
 
-    static void ScoreExp() {
-        System.out.println("");
+    String About() {
+        return "About:" +
+                "\nWelcome to Carthage, an adventure game which" +
+                "\nlets you explore different cities and areas while" +
+                "\nleveling up your gear and fighting monsters!";
     }
 }
